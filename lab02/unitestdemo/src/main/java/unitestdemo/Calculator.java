@@ -19,4 +19,11 @@ public class Calculator {
 		return a / b;
 	}
 	
+	public boolean greater(int a, int b) {
+		if(a > b)
+			return true;
+		else
+			return false;
+	}
+	
 }

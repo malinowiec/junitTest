@@ -1,6 +1,7 @@
 package unitestdemo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -31,5 +32,12 @@ public class CalculatorTest {
 		assertEquals(2, calc.div(4, 2));
 		System.out.println("Div ");
 	}
+	
+	@Test
+	  public void testAssertTrue() {
+	    assertTrue(calc.greater(4, 3));
+	    System.out.println("Greater ");
+	  }
+	
 	
 }
