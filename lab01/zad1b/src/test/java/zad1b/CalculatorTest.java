@@ -24,13 +24,14 @@ public class CalculatorTest {
 	public void checkMulti() {
 		assertEquals(10, calc.multi(5, 2));
 		System.out.println("Multi ");
+		
 	}
 	
-	@Test
+	@Test(expected = ArithmeticException.class) 
 	public void checkDiv() {
-		assertEquals(2, calc.div(4, 2));
-		System.out.println("Div ");
-	}
+		assertEquals(2, calc.div(4, 0));
+	} 
+	
 	
 	@Test
 	  public void testAssertTrue() {
