@@ -10,7 +10,7 @@ local.properties
 .loadpath
 .recommenders
 
-# Eclipse Core
+target# Eclipse Core
 .project
 
 # External tool builders
