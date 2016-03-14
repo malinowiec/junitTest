@@ -1,5 +1,5 @@
 .metadata
-bin/
+targetbin/
 tmp/
 *.tmp
 *.bak
@@ -10,7 +10,7 @@ local.properties
 .loadpath
 .recommenders
 
-target# Eclipse Core
+# Eclipse Core
 .project
 
 # External tool builders
