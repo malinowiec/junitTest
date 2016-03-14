@@ -1,5 +1,6 @@
 .metadata
-targetbin/
+target
+bin/
 tmp/
 *.tmp
 *.bak
