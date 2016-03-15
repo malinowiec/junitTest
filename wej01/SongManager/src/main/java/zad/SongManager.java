@@ -1,10 +1,10 @@
 package zad;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class SongManager {
+	
 	ArrayList<Song> songList = new ArrayList<Song>();
 	
 	public void add(Song song){
