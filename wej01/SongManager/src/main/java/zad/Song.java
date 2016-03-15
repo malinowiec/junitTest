@@ -1,14 +1,21 @@
 package zad;
 
-class Song {
+import java.util.ArrayList;
 
-    private String name;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+public class Song {
+	public String title;
+	public int year;
+	
+	public Song(String title){
+		this.title = title;
+
+	}
+	public String getTitle() {
+		return title;
+	}
+
+
+	
 }
