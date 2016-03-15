@@ -17,12 +17,12 @@ public class SongTest {
 			assertEquals(0, manager.songList.size());
 			
 			manager.add(song1);
-			assertEquals(2, manager.songList.size());
-			assertEquals("Song2", manager.songList.get(0).title);
+			assertEquals(1, manager.songList.size());
+			assertEquals("song1", manager.songList.get(0).title);
 			
 			manager.add(song2);
 			assertEquals(2, manager.songList.size());
-			assertEquals("Song2", manager.songList.get(1).title);
+			assertEquals("song2", manager.songList.get(1).title);
 
 		}
 		
