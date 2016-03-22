@@ -27,13 +27,13 @@ public class SongTest {
 			assertEquals("song1", manager.getAll().get(0).getTitle());
 			assertEquals("BandName1", manager.getAll().get(0).getBand());
 			System.out.println("Title1:" + manager.getAll().get(0).getTitle());
-			System.out.println("Band2:" + manager.getAll().get(0).getBand());
+			System.out.println("Band1:" + manager.getAll().get(0).getBand());
 			
 			manager.add(song2);
 			assertEquals(2, manager.getAll().size());
 			assertEquals("song2", manager.getAll().get(1).getTitle());
 			assertEquals("BandName2", manager.getAll().get(1).getBand());
-			System.out.println("Title3:" + manager.getAll().get(1).getTitle());
+			System.out.println("Title2:" + manager.getAll().get(1).getTitle());
 			System.out.println("Band2:" + manager.getAll().get(1).getBand());
 			
 			manager.add(song3);
