@@ -87,6 +87,6 @@ public class SongTest {
 			manager.remove(song1);
 			assertEquals(0, manager.getAll().size());
 			
-		//	System.out.println("usuwanie dzia�a!");
+		//	System.out.println("usuwanie dziala!");
 		}
 }
