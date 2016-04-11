@@ -1,10 +1,15 @@
+
+
+
+
+
 package com.example.mockdemo.messenger;
 
-import java.util.Random;
+//import java.util.Random;
 
 public class MessageServiceSimpleImpl implements MessageService {
 
-	private Random random = new Random();
+//	private Random random = new Random();
 
 	public ConnectionStatus checkConnection(String server) {
 		// checking the server here ...
@@ -27,12 +32,8 @@ public class MessageServiceSimpleImpl implements MessageService {
 		if (checkConnection(server) == ConnectionStatus.FAILURE) {
 			return SendingStatus.SENDING_ERROR;
 		}
-
-		// sending logic here ...
-		if (random.nextBoolean()) {
+		 
 			return SendingStatus.SENT;
-		}
-		return SendingStatus.SENDING_ERROR;
 	}
 
 }
