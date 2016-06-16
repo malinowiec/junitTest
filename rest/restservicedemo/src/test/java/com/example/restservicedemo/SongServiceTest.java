@@ -32,6 +32,7 @@ public class SongServiceTest {
     }
 	
 	@Test
+	@Ignore
 	public void addSongs(){		
 		
 		delete("/song/deleteSongs").then().assertThat().statusCode(200);
@@ -51,6 +52,7 @@ public class SongServiceTest {
 	}
 	
 	@Test
+	@Ignore
 	public void deleteSongWithId(){
 		
 Song song = new Song(0, SONG_TITLE, "ALBUM");
@@ -71,6 +73,7 @@ Song song = new Song(0, SONG_TITLE, "ALBUM");
 	}
 	
 	@Test
+	@Ignore
 	public void getAllSongs(){
 		delete("/song/deleteSongs/").then().assertThat().statusCode(200);
 		Song song1 = new Song(1,"Jeden", "album1");

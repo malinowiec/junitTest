@@ -39,7 +39,7 @@ public class BandRESTService {
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addBand(Band band){
-		bm.addBand(band);
+		bm.addBandWithId(band);
 		return Response.status(201).entity("Band").build(); 
 	}
 	

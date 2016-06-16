@@ -52,6 +52,7 @@ public class BandServiceTest {
 	@Test
 	public void clearBands() {
 		delete("/band/deleteBands").then().assertThat().statusCode(200);
+		
 		given()
 	       	.contentType(MediaType.APPLICATION_JSON)
 	       	.body(Band.class)
@@ -63,6 +64,8 @@ public class BandServiceTest {
 	@Test
 		public void deleteBandWithName(){
 			
+		delete("/band/deleteBands").then().assertThat().statusCode(200);
+		
 Band band = new Band(0, BAND_NAME, 1976);
 		
 		given().
@@ -81,9 +84,10 @@ Band band = new Band(0, BAND_NAME, 1976);
 	
 	@Test
 	public void getAllBands(){
-		delete("/band/deleteBands/").then().assertThat().statusCode(200);
+		delete("/band/deleteBands").then().assertThat().statusCode(200);
+		
 		Band band1 = new Band(1, "Zespol1", 1990);
-		Band band2 = new Band(2,"ZespolDwa", 1972);
+		Band band2 = new Band(3,"Zespol2", 2002);
 		given()
 			.contentType(MediaType.APPLICATION_JSON)
 			.body(band1)
@@ -103,11 +107,11 @@ Band band = new Band(0, BAND_NAME, 1976);
 			.body("band[0].id", equalTo("1"))
 			.body("band[0].name", equalTo("Zespol1"))
 			.body("band[0].yoc", equalTo("1990"))
-			.body("band[1].id", equalTo("2"))
-			.body("band[1].name",equalTo("ZespolDwa"))
-			.body("band[1].yoc", equalTo("1972"))
-		
-			.body("band.id", hasItems("1","2"));
+			.body("band[2].id", equalTo("3"))
+			.body("band[2].name",equalTo("Zespol2"))
+			.body("band[2].yoc", equalTo("2002"));
+		//
+		//	.body("band.id", hasItems("1","2"));
 	}
 	
 

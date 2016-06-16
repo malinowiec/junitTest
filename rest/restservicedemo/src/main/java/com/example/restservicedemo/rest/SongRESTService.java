@@ -40,7 +40,7 @@ public class SongRESTService {
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addSong(Song song){
-		bm.addSong(song);
+		bm.addSongWithId(song);
 		return Response.status(201).entity("Song").build(); 
 	}
 	
