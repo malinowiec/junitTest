@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-<BAND B_ID="1" NAME="Zespol1" YOC="1978"/>
-  <BAND B_ID="2" NAME="Zespol2" YOC="2002"/>
-  <SONG S_ID="1" TITLE="Jeden" ALBUM="album1"/>
-  <SONG S_ID="2" TITLE="Dwa" ALBUM="album2"/>
-  <SONG S_ID="3" TITLE="TytulTrzy" ALBUM="album3"/>
-  </dataset>

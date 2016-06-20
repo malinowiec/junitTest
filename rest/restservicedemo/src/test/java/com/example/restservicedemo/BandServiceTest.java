@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
 import com.example.restservicedemo.domain.Band;
+import com.example.restservicedemo.domain.Song;
 import com.jayway.restassured.RestAssured;
 
 public class BandServiceTest {
@@ -31,6 +32,7 @@ public class BandServiceTest {
     }
 	
 	@Test
+	
 	public void addBands(){		
 		
 		delete("/band/deleteBands").then().assertThat().statusCode(200);
@@ -50,6 +52,7 @@ public class BandServiceTest {
 	}
 	
 	@Test
+	
 	public void clearBands() {
 		delete("/band/deleteBands").then().assertThat().statusCode(200);
 		
@@ -62,6 +65,7 @@ public class BandServiceTest {
 	}
 	
 	@Test
+	
 		public void deleteBandWithName(){
 			
 		delete("/band/deleteBands").then().assertThat().statusCode(200);
@@ -83,6 +87,7 @@ Band band = new Band(0, BAND_NAME, 1976);
 		}
 	
 	@Test
+	
 	public void getAllBands(){
 		delete("/band/deleteBands").then().assertThat().statusCode(200);
 		
@@ -107,12 +112,11 @@ Band band = new Band(0, BAND_NAME, 1976);
 			.body("band[0].id", equalTo("1"))
 			.body("band[0].name", equalTo("Zespol1"))
 			.body("band[0].yoc", equalTo("1990"))
-			.body("band[2].id", equalTo("3"))
-			.body("band[2].name",equalTo("Zespol2"))
-			.body("band[2].yoc", equalTo("2002"));
-		//
-		//	.body("band.id", hasItems("1","2"));
+			.body("band[1].id", equalTo("3"))
+			.body("band[1].name",equalTo("Zespol2"))
+			.body("band[1].yoc", equalTo("2002"))
+		
+			.body("band.id", hasItems("1","3"));
 	}
-	
 
 }

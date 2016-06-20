@@ -1,5 +1,6 @@
 package com.example.restservicedemo;
 
+import static com.jayway.restassured.RestAssured.delete;
 import static com.jayway.restassured.RestAssured.given;
 
 import java.io.File;
@@ -18,6 +19,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.filter.DefaultColumnFilter;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.hamcrest.Matchers;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -55,31 +57,31 @@ public class BandServiceRESTDBTest {
 	}
 
 	@Test
-	@Ignore
+	
 	public void addBand() throws Exception{
 	
 		Band aBand = new Band(1, "BandName1", 2010);
 		given().contentType(MediaType.APPLICATION_JSON).body(aBand)
-				.when().post("/band/").then().assertThat().statusCode(201);
+				.when().post("/band/add").then().assertThat().statusCode(201);
 		
 		IDataSet dbDataSet = connection.createDataSet();
 		ITable actualTable = dbDataSet.getTable("BAND");
-		ITable filteredTable = DefaultColumnFilter.excludedColumnsTable
-				(actualTable, new String[]{"B_ID"});
 		
 		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
-				new File("src/test/resources/BandData.xml"));
+				new File("src/test/resources/afterAddData.xml"));
 		ITable expectedTable = expectedDataSet.getTable("BAND");
 		
-		Assertion.assertEquals(expectedTable, filteredTable);
+		Assertion.assertEquals(expectedTable, actualTable);
+		
+		delete("/band/deleteBands").then().assertThat().statusCode(200);
 	}
 	
 	@Test
-	@Ignore
+	
 	public void addSong() throws Exception {
-		Song aSong = new Song(2, "title", "album");
+		Song aSong = new Song(1, "TitleName1", "AlbumName");
 		given().contentType(MediaType.APPLICATION_JSON).body(aSong)
-				.when().post("/songs/").then().assertThat().statusCode(201);
+				.when().post("/song/add").then().assertThat().statusCode(201);
 
 		IDataSet dbDataSet = connection.createDataSet();
 		ITable actualTable = dbDataSet.getTable("SONG");
@@ -87,11 +89,84 @@ public class BandServiceRESTDBTest {
 				(actualTable, new String[]{"OWNER_ID"});
 		
 		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
-				new File("src/test/resources/songData.xml"));
+				new File("src/test/resources/afterAddData.xml"));
+		ITable expectedTable = expectedDataSet.getTable("SONG");
+		
+		Assertion.assertEquals(expectedTable, filteredTable);
+		
+		delete("/song/deleteSongs").then().assertThat().statusCode(200);
+	}
+	
+	@Test
+	
+	public void deleteSongs() throws Exception {
+		delete("/song/deleteSongs").then().assertThat().statusCode(200);
+		
+		given()
+	       	.contentType(MediaType.APPLICATION_JSON)
+	       	.body(Song.class)
+	    .when()
+	    .then()
+	    	.body("", Matchers.hasSize(0));
+		
+		IDataSet dbDataSet = connection.createDataSet();
+		ITable actualTable = dbDataSet.getTable("SONG");
+		ITable filteredTable = DefaultColumnFilter.excludedColumnsTable
+				(actualTable, new String[]{"OWNER_ID"});
+		
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
+				new File("src/test/resources/afterDelete.xml"));
 		ITable expectedTable = expectedDataSet.getTable("SONG");
 		
 		Assertion.assertEquals(expectedTable, filteredTable);
 	}
+	
+	@Test
+	
+	public void deleteBands() throws Exception {
+		delete("/band/deleteBands").then().assertThat().statusCode(200);
+		
+		given()
+	       	.contentType(MediaType.APPLICATION_JSON)
+	       	.body(Band.class)
+	    .when()
+	    .then()
+	    	.body("", Matchers.hasSize(0));
+		
+		IDataSet dbDataSet = connection.createDataSet();
+		ITable actualTable = dbDataSet.getTable("BAND");
+
+		
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
+				new File("src/test/resources/afterDelete.xml"));
+		ITable expectedTable = expectedDataSet.getTable("BAND");
+		
+		Assertion.assertEquals(expectedTable, actualTable);
+	}
+	
+@Test
+	
+	public void deleteBandWithName() throws Exception {
+		delete("/band/deleteBands").then().assertThat().statusCode(200);
+		
+		Band aBand = new Band(1, "BandName1", 2010);
+		
+		given().contentType(MediaType.APPLICATION_JSON).body(aBand)
+		.when().post("/band/add").then().assertThat().statusCode(201);
+		
+		delete("/band/deleteBand/BandName1").then().assertThat().statusCode(200);
+		
+		IDataSet dbDataSet = connection.createDataSet();
+		ITable actualTable = dbDataSet.getTable("BAND");
+
+		
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
+				new File("src/test/resources/afterRemoveNameData.xml"));
+		ITable expectedTable = expectedDataSet.getTable("BAND");
+		
+		Assertion.assertEquals(expectedTable, actualTable);
+	}
+	
 	
 	@AfterClass
 	public static void tearDown() throws Exception{

@@ -1,10 +1,11 @@
-package com.example.restservicedemo;
+package JUnitTests;
 
 import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,14 +19,15 @@ public class BDBandTest {
 	BandManager pm = new BandManager();
 
 	
-	@Before
-	public void deleteDB(){
-		pm.clearSongs();
-		pm.clearBands();
-	}
+//	@Before
+//	public void deleteDB(){
+//		pm.clearSongs();
+//		pm.clearBands();
+//	}
 	
 	//Band1
 		@Test
+		
 		public void checkBandAddingWithoutId(){
 			pm.clearBands();
 			Band b = new Band();
@@ -36,6 +38,7 @@ public class BDBandTest {
 		
 	//Band2
 	@Test
+	
 	public void checkBandAddingWithId() {
 		pm.clearBands();
 		Band b = new Band();
@@ -49,6 +52,7 @@ public class BDBandTest {
 	
 	//Band3
 	@Test
+	
 	public void checkDeleteAllBands(){
 		pm.clearBands();
 		Band b1 = new Band();
@@ -73,6 +77,7 @@ public class BDBandTest {
 	
 	//Band4
 	@Test
+	
 	public void checkAllBands() {
 		pm.clearBands();
 		
@@ -93,6 +98,7 @@ public class BDBandTest {
 
 	//Band5
 	@Test
+	
 	public void getBandById(){
 		pm.clearBands();
 		Band b = new Band();
@@ -114,6 +120,7 @@ public class BDBandTest {
 
 	//Band6
 	@Test
+	
 	public void getAllBandsWithSongs(){
 		pm.clearBands();
 		pm.clearSongs();
@@ -168,5 +175,11 @@ public class BDBandTest {
 		assertEquals(bands.get(0),m.get(bands.get(0)).get(1).getOwner());
 		assertEquals(bands.get(1),m.get(bands.get(1)).get(0).getOwner());
 	}
+	
+//	@After
+//	public void deleteDB2(){
+//		pm.clearSongs();
+//		pm.clearBands();
+//	}
 	
 }

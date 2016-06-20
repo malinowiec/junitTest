@@ -1,4 +1,4 @@
-package com.example.restservicedemo;
+package JUnitTests;
 
 
 import static org.junit.Assert.assertEquals;
@@ -19,16 +19,17 @@ public class BDSongTest {
 	BandManager pm = new BandManager();
 
 	
-	@Before
-	public void deleteDB(){
-		pm.clearSongs();
-		pm.clearBands();
-	}
+//	@Before
+//	public void deleteDB(){
+//		pm.clearSongs();
+//		pm.clearBands();
+//	}
 	
 
 	
 	//Song1
 		@Test
+		
 		public void checkSongAddingWithoutId(){
 			Song s = new Song();
 			s.setTitle("SongBezId");
@@ -38,6 +39,7 @@ public class BDSongTest {
 		
 		//Song2
 		@Test
+		
 		public void checkSongAddingWithId() {
 			pm.clearSongs();
 			Song s = new Song();
@@ -49,6 +51,7 @@ public class BDSongTest {
 		
 		//Song3
 		@Test
+		
 		public void checkDeleteAllSongs(){
 			pm.clearSongs();
 			
@@ -74,6 +77,7 @@ public class BDSongTest {
 		
 		//Song4
 		@Test
+		
 		public void checkAllSongs() {
 			pm.clearSongs();
 			
@@ -94,6 +98,7 @@ public class BDSongTest {
 		
 		//Song5
 		@Test
+		
 		public void getSongById(){
 			pm.clearSongs();
 			Song s = new Song();
@@ -109,6 +114,7 @@ public class BDSongTest {
 		
 	//Song6
 	@Test
+	
 	public void checkGiveSongToBand() {
 		pm.clearSongs();
 		pm.clearBands();
@@ -166,6 +172,7 @@ public class BDSongTest {
 	
 	//Song7
 	@Test
+	
 	public void getSongWithOwner(){
 		
 		pm.clearSongs();

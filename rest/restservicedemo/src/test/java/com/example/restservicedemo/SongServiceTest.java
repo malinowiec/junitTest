@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 import javax.ws.rs.core.MediaType;
 
+import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -32,10 +33,11 @@ public class SongServiceTest {
     }
 	
 	@Test
-	@Ignore
+	
 	public void addSongs(){		
 		
 		delete("/song/deleteSongs").then().assertThat().statusCode(200);
+		delete("/band/deleteBands").then().assertThat().statusCode(200);
 		
 		Song song = new Song(0, SONG_TITLE, "ALBUM");
 		
@@ -52,7 +54,7 @@ public class SongServiceTest {
 	}
 	
 	@Test
-	@Ignore
+	
 	public void deleteSongWithId(){
 		
 Song song = new Song(0, SONG_TITLE, "ALBUM");
@@ -73,7 +75,20 @@ Song song = new Song(0, SONG_TITLE, "ALBUM");
 	}
 	
 	@Test
-	@Ignore
+	
+	public void clearSongs() {
+		delete("/song/deleteSongs").then().assertThat().statusCode(200);
+		
+		given()
+	       	.contentType(MediaType.APPLICATION_JSON)
+	       	.body(Song.class)
+	    .when()
+	    .then()
+	    	.body("", Matchers.hasSize(0));
+	}
+	
+	@Test
+	
 	public void getAllSongs(){
 		delete("/song/deleteSongs/").then().assertThat().statusCode(200);
 		Song song1 = new Song(1,"Jeden", "album1");
@@ -102,36 +117,6 @@ Song song = new Song(0, SONG_TITLE, "ALBUM");
 			.body("song[1].album", equalTo("album2"))
 		
 			.body("song.id", hasItems("1","2"));
-	}
-	
-	@Test
-	@Ignore
-	public void getSongWithOwner(){
-		delete("/song/deleteSongs/").then().assertThat().statusCode(200);
-		delete("/band/deleteBands/").then().assertThat().statusCode(200);
-		Band band1 = new Band(1,"ZespolJeden", 1990);
-		Song song1 = new Song(1,"SongFiat","1999");
-		given()
-			.contentType(MediaType.APPLICATION_JSON)
-			.body(band1)
-		.when()
-			.post("/band/add").then().assertThat().statusCode(201);
-		given()
-			.contentType(MediaType.APPLICATION_JSON)
-			.body(song1)
-		.when()
-			.post("/song/addSongWithId").then().assertThat().statusCode(201);
-		
-		given()
-		.when()
-			.get("/song/song/1")
-		.then()
-			.body("id", equalTo("1"))
-			.body("title", equalTo("SongFiat"))
-			.body("album", equalTo("1999"))
-			.body("owner.id", equalTo("1"))
-			.body("owner.name", equalTo("ZespolJeden"))
-			.body("owner.yop", equalTo("1990"));
 	}
 
 }
